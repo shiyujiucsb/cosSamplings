@@ -1,0 +1,293 @@
+\begin{thebibliography}{10}
+
+\bibitem{ATY13}
+Maha Alabduljalil, Xun Tang, and Tao Yang.
+\newblock Cache-conscious performance optimization for similarity search.
+\newblock In {\em Proceedings of the 36th international ACM SIGIR conference on
+  Research and development in information retrieval}, pages 713--722. ACM,
+  2013.
+
+\bibitem{AMT13}
+Maha~Ahmed Alabduljalil, Xun Tang, and Tao Yang.
+\newblock Optimizing parallel algorithms for all pairs similarity search.
+\newblock In {\em Proceedings of the sixth ACM international conference on Web
+  search and data mining}, pages 203--212. ACM, 2013.
+
+\bibitem{AGO14}
+Davide Anguita, Alessandro Ghio, Luca Oneto, and Sandro Ridella.
+\newblock A deep connection between the vapnik--chervonenkis entropy and the
+  rademacher complexity.
+\newblock {\em IEEE transactions on neural networks and learning systems},
+  25(12):2202--2211, 2014.
+
+\bibitem{BBM05}
+Peter~L Bartlett, Olivier Bousquet, and Shahar Mendelson.
+\newblock Local rademacher complexities.
+\newblock {\em Annals of Statistics}, pages 1497--1537, 2005.
+
+\bibitem{BM02}
+Peter~L Bartlett and Shahar Mendelson.
+\newblock Rademacher and gaussian complexities: Risk bounds and structural
+  results.
+\newblock {\em Journal of Machine Learning Research}, 3(Nov):463--482, 2002.
+
+\bibitem{BMS07}
+Roberto~J Bayardo, Yiming Ma, and Ramakrishnan Srikant.
+\newblock Scaling up all pairs similarity search.
+\newblock In {\em Proceedings of the 16th international conference on World
+  Wide Web}, pages 131--140. ACM, 2007.
+
+\bibitem{BCY09}
+Jacob Benesty, Jingdong Chen, Yiteng Huang, and Israel Cohen.
+\newblock Pearson correlation coefficient.
+\newblock In {\em Noise reduction in speech processing}, pages 1--4. Springer,
+  2009.
+
+\bibitem{BLM99}
+S~Boucheron, G~Lugosi, and Pascal Massart.
+\newblock A sharp concentration inequality with applications.
+\newblock {\em Random Structures and Algorithms}, 1999.
+
+\bibitem{BBL04}
+Olivier Bousquet, St{\'e}phane Boucheron, and G{\'a}bor Lugosi.
+\newblock Introduction to statistical learning theory.
+\newblock In {\em Advanced lectures on machine learning}, pages 169--207.
+  Springer, 2004.
+
+\bibitem{Bran01}
+Ulrik Brandes.
+\newblock A faster algorithm for betweenness centrality*.
+\newblock {\em Journal of mathematical sociology}, 25(2):163--177, 2001.
+
+\bibitem{CJP08}
+Huanhuan Cao, Daxin Jiang, Jian Pei, Qi~He, Zhen Liao, Enhong Chen, and Hang
+  Li.
+\newblock Context-aware query suggestion by mining click-through and session
+  data.
+\newblock In {\em Proceedings of the 14th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 875--883. ACM, 2008.
+
+\bibitem{CCK12}
+Liangliang Cao, Brian Cho, Hyun~Duk Kim, Zhen Li, Min-Hsuan Tsai, and Indranil
+  Gupta.
+\newblock Delta-simrank computing on mapreduce.
+\newblock In {\em Proceedings of the 1st International Workshop on Big Data,
+  Streams and Heterogeneous Source Mining: Algorithms, Systems, Programming
+  Models and Applications}, pages 28--35. ACM, 2012.
+
+\bibitem{CDG07}
+Carlos Castillo, Debora Donato, Aristides Gionis, Vanessa Murdock, and Fabrizio
+  Silvestri.
+\newblock Know your neighbors: Web spam detection using the web topology.
+\newblock In {\em Proceedings of the 30th annual international ACM SIGIR
+  conference on Research and development in information retrieval}, pages
+  423--430. ACM, 2007.
+
+\bibitem{Char02}
+Moses~S Charikar.
+\newblock Similarity estimation techniques from rounding algorithms.
+\newblock In {\em Proceedings of the thiry-fourth annual ACM symposium on
+  Theory of computing}, pages 380--388. ACM, 2002.
+
+\bibitem{DHM04}
+Xin Dong, Alon Halevy, Jayant Madhavan, Ema Nemes, and Jun Zhang.
+\newblock Similarity search for web services.
+\newblock In {\em Proceedings of the Thirtieth international conference on Very
+  large data bases-Volume 30}, pages 372--383. VLDB Endowment, 2004.
+
+\bibitem{FKS03}
+Ronald Fagin, Ravi Kumar, and Dandapani Sivakumar.
+\newblock Efficient similarity search and classification via rank aggregation.
+\newblock In {\em Proceedings of the 2003 ACM SIGMOD international conference
+  on Management of data}, pages 301--312. ACM, 2003.
+
+\bibitem{FNS13}
+Yasuhiro Fujiwara, Makoto Nakatsuji, Hiroaki Shiokawa, and Makoto Onizuka.
+\newblock Efficient search algorithm for simrank.
+\newblock In {\em Data Engineering (ICDE), 2013 IEEE 29th International
+  Conference on}, pages 589--600. IEEE, 2013.
+
+\bibitem{GIM99}
+Aristides Gionis, Piotr Indyk, Rajeev Motwani, et~al.
+\newblock Similarity search in high dimensions via hashing.
+\newblock {\em VLDB}, 99(6):518--529, 1999.
+
+\bibitem{HHH89}
+Lieve Hamers, Yves Hemeryck, Guido Herweyers, Marc Janssen, Hans Keters, Ronald
+  Rousseau, and Andr{\'e} Vanhoutte.
+\newblock Similarity measures in scientometric research: the jaccard index
+  versus salton's cosine formula.
+\newblock {\em Information Processing \& Management}, 25(3):315--318, 1989.
+
+\bibitem{HFL10}
+Guoming He, Haijun Feng, Cuiping Li, and Hong Chen.
+\newblock Parallel simrank computation on large graphs with iterative
+  aggregation.
+\newblock In {\em Proceedings of the 16th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 543--552. ACM, 2010.
+
+\bibitem{H63}
+Wassily Hoeffding.
+\newblock Probability inequalities for sums of bounded random variables.
+\newblock {\em Journal of the American statistical association},
+  58(301):13--30, 1963.
+
+\bibitem{IM98}
+Piotr Indyk and Rajeev Motwani.
+\newblock Approximate nearest neighbors: towards removing the curse of
+  dimensionality.
+\newblock In {\em Proceedings of the thirtieth annual ACM symposium on Theory
+  of computing}, pages 604--613. ACM, 1998.
+
+\bibitem{JW02}
+Glen Jeh and Jennifer Widom.
+\newblock Simrank: a measure of structural-context similarity.
+\newblock In {\em Proceedings of the eighth ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 538--543. ACM, 2002.
+
+\bibitem{KMK14}
+Mitsuru Kusumoto, Takanori Maehara, and Ken-ichi Kawarabayashi.
+\newblock Scalable similarity search for simrank.
+\newblock In {\em Proceedings of the 2014 ACM SIGMOD international conference
+  on Management of data}, pages 325--336. ACM, 2014.
+
+\bibitem{LK15}
+Jure Leskovec and Andrej Krevl.
+\newblock Snap datasets: Stanford large network dataset collection.
+\newblock {\em Stanford University}, 2015.
+
+\bibitem{LRU14}
+Jure Leskovec, Anand Rajaraman, and Jeffrey~David Ullman.
+\newblock {\em Mining of massive datasets}.
+\newblock Cambridge University Press, 2014.
+
+\bibitem{LH10}
+Cuiping Li, Jiawei Han, Guoming He, Xin Jin, Yizhou Sun, Yintao Yu, and Tianyi
+  Wu.
+\newblock Fast computation of simrank for static and dynamic information
+  networks.
+\newblock In {\em Proceedings of the 13th International Conference on Extending
+  Database Technology}, pages 465--476. ACM, 2010.
+
+\bibitem{Lin09}
+Jimmy Lin.
+\newblock Brute force and indexed approaches to pairwise document similarity
+  comparisons with mapreduce.
+\newblock In {\em Proceedings of the 32nd international ACM SIGIR conference on
+  Research and development in information retrieval}, pages 155--162. ACM,
+  2009.
+
+\bibitem{LCH06}
+Chao Liu, Chen Chen, Jiawei Han, and Philip~S Yu.
+\newblock Gplag: detection of software plagiarism by program dependence graph
+  analysis.
+\newblock In {\em Proceedings of the 12th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 872--881. ACM, 2006.
+
+\bibitem{M89}
+Colin McDiarmid.
+\newblock On the method of bounded differences.
+\newblock {\em Surveys in combinatorics}, 141(1):148--188, 1989.
+
+\bibitem{Mohri09}
+Mehryar Mohri and Afshin Rostamizadeh.
+\newblock Rademacher complexity bounds for non-iid processes.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  1097--1104, 2009.
+
+\bibitem{Oneto13}
+Luca Oneto, Alessandro Ghio, Davide Anguita, and Sandro Ridella.
+\newblock An improved analysis of the rademacher data-dependent bound using its
+  self bounding property.
+\newblock {\em Neural Networks}, 44:107--111, 2013.
+
+\bibitem{RV97}
+Paul Resnick and Hal~R Varian.
+\newblock Recommender systems.
+\newblock {\em Communications of the ACM}, 40(3):56--58, 1997.
+
+\bibitem{RK14}
+Matteo Riondato and Evgenios~M Kornaropoulos.
+\newblock Fast approximation of betweenness centrality through sampling.
+\newblock In {\em Proceedings of the 7th ACM international conference on Web
+  search and data mining}, pages 413--422. ACM, 2014.
+
+\bibitem{RK16}
+Matteo Riondato and Evgenios~M Kornaropoulos.
+\newblock Fast approximation of betweenness centrality through sampling.
+\newblock {\em Data Mining and Knowledge Discovery}, 30(2):438--475, 2016.
+
+\bibitem{RU15}
+Matteo Riondato and Eli Upfal.
+\newblock Mining frequent itemsets through progressive sampling with rademacher
+  averages.
+\newblock In {\em Proceedings of the 21th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, pages 1005--1014. ACM, 2015.
+
+\bibitem{RU16}
+Matteo Riondato and Eli Upfal.
+\newblock Abra: Approximating betweenness centrality in static and dynamic
+  graphs with rademacher averages.
+\newblock {\em arXiv preprint arXiv:1602.05866}, 2016.
+
+\bibitem{SKK01}
+Badrul Sarwar, George Karypis, Joseph Konstan, and John Riedl.
+\newblock Item-based collaborative filtering recommendation algorithms.
+\newblock In {\em Proceedings of the 10th international conference on World
+  Wide Web}, pages 285--295. ACM, 2001.
+
+\bibitem{SGM00}
+Alexander Strehl, Joydeep Ghosh, and Raymond Mooney.
+\newblock Impact of similarity measures on web-page clustering.
+\newblock In {\em Workshop on Artificial Intelligence for Web Search (AAAI
+  2000)}, pages 58--64, 2000.
+
+\bibitem{TAJY14}
+Xun Tang, Maha Alabduljalil, Xin Jin, and Tao Yang.
+\newblock Load balancing for partition-based similarity search.
+\newblock In {\em Proceedings of the 37th international ACM SIGIR conference on
+  Research \& development in information retrieval}, pages 193--202. ACM, 2014.
+
+\bibitem{TP07}
+Sandeep Tata and Jignesh~M Patel.
+\newblock Estimating the selectivity of tf-idf based cosine similarity
+  predicates.
+\newblock {\em ACM Sigmod Record}, 36(2):7--12, 2007.
+
+\bibitem{TEL11}
+Ferhan Ture, Tamer Elsayed, and Jimmy Lin.
+\newblock No free lunch: brute force vs. locality-sensitive hashing for
+  cross-lingual pairwise similarity.
+\newblock In {\em Proceedings of the 34th international ACM SIGIR conference on
+  Research and development in Information Retrieval}, pages 943--952. ACM,
+  2011.
+
+\bibitem{Vap13}
+Vladimir Vapnik.
+\newblock {\em The nature of statistical learning theory}.
+\newblock Springer Science \& Business Media, 2013.
+
+\bibitem{VLL94}
+Vladimir Vapnik, Esther Levin, and Yann Le~Cun.
+\newblock Measuring the vc-dimension of a learning machine.
+\newblock {\em Neural Computation}, 6(5):851--876, 1994.
+
+\bibitem{Vap98}
+Vladimir~Naumovich Vapnik and Vlamimir Vapnik.
+\newblock {\em Statistical learning theory}, volume~1.
+\newblock Wiley New York, 1998.
+
+\bibitem{Xia16}
+Zhihua Xia, Xinhui Wang, Xingming Sun, and Qian Wang.
+\newblock A secure and dynamic multi-keyword ranked search scheme over
+  encrypted cloud data.
+\newblock {\em IEEE Transactions on Parallel and Distributed Systems},
+  27(2):340--352, 2016.
+
+\bibitem{YM15}
+Weiren Yu and Julie~Ann McCann.
+\newblock High quality graph-based similarity search.
+\newblock In {\em Proceedings of the 38th International ACM SIGIR Conference on
+  Research and Development in Information Retrieval}, pages 83--92. ACM, 2015.
+
+\end{thebibliography}
