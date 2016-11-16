@@ -146,7 +146,7 @@ By the above two theorems, we can bound our approximation error even for the wor
 \label{sec:acs}
 This section proposes our approximation algorithm and its analysis.
 {\color{black}
-The approximation algorithm takes as input a collection of $n$ vectors $V$, a collection of $p$ candidate pairs $P$, and two parameters $(\epsilon, \delta)$ whose values are between 0 and 1. The candidate pairs $P$ can be given by a dissimilarity detection algorithm, e.g., LSH based method \cite{LRU14}, Feature Scoring \cite{CL99}, Diamond Sampling \cite{BKP15}. The algorithm outputs a set $C = \{\tilde{S}(u,v): u,v \in V, (u,v)\in P\}$, where $\tilde{S}(u,v)$ is the $(\epsilon, \delta)$- approximation of cosine similarity between $u$ and $v$, i.e., with probability at least $1-\delta$, the worst approximation error in $C$ is at most $\epsilon$. Each vector in $V$ contains some features. In practice we often consider the features in different weights, i.e., each vector may have several key features, while other features are minor. Since the number of key features are usually small, we can store the key features of a vector into an associated file. When estimating the cosine similarity between two vectors, we first take the overlapped key features of the two vectors and calculate the products on the overlapped features. The sum of these products give the major contribution of the cosine similarity. Note that the idea of many existing cosine similarity sampling algorithms \cite{CL99,BKP15} is also based on this observation. Then we only need to estimate the remaining features outside of the overlapped key ones. Suppose we have $m$ of them. We take these $m$ features as the sample space $D = \{1,\cdots,m\}$. For each feature $s\in D$, let $f_{u,v}(s) = u_s\cdot v_s$, where $u_s$ is the $s$-th feature value of the vector $u$. Let $F = \{f_{u,v}: u,v\in V, (u,v)\in P\}$. Thus $|F| = p$. It is clear that the true average of each $f_{u,v}$ equals to the cosine similarity between $u$ and $v$. Given the sampled features of size $k$, the upper bound of $R_S(F)$ is 
+The approximation algorithm takes as input a collection of $n$ vectors $V$, a collection of $p$ candidate pairs $P$, and two parameters $(\epsilon, \delta)$ whose values are between 0 and 1. The candidate pairs $P$ can be given by a dissimilarity detection algorithm, e.g., LSH based method \cite{LRU14}, Feature Scoring \cite{CL99}, Diamond Sampling \cite{BKP15}. The algorithm outputs a set $C = \{\tilde{S}(u,v): u,v \in V, (u,v)\in P\}$, where $\tilde{S}(u,v)$ is the $(\epsilon, \delta)$- approximation of cosine similarity between $u$ and $v$, i.e., with probability at least $1-\delta$, the worst approximation error in $C$ is at most $\epsilon$. Each vector in $V$ contains some features. In practice we often consider the features in different weights, i.e., each vector may have several key features, while other features are minor. Since the number of key features are usually small, we can store the key features of a vector into an associated file. When estimating the cosine similarity between two vectors, we first take the key features of the two vectors and calculate the products on the key features. The sum of these products give the major contribution of the cosine similarity. Note that the idea of many existing cosine similarity sampling algorithms \cite{CL99,BKP15} is also based on this observation. Then we only need to estimate the remaining features outside of the key ones. Suppose we have $m$ of them. We take these $m$ features as the sample space $D = \{1,\cdots,m\}$. For each feature $s\in D$, let $f_{u,v}(s) = u_s\cdot v_s$, where $u_s$ is the $s$-th feature value of the vector $u$. Let $F = \{f_{u,v}: u,v\in V, (u,v)\in P\}$. Thus $|F| = p$. It is clear that the true average of each $f_{u,v}$ equals to the cosine similarity between $u$ and $v$. Given the sampled features of size $k$, the upper bound of $R_S(F)$ is 
 $$R_S(F) \leq \frac{\ell}{k}\sqrt{8\log p},$$
 where $\ell = \sqrt{\max_{f\in F} \sum_{i=1}^k f(s_i)^2}$. Since $F$ is finite, we can replace supreme by maximum. 
 }
@@ -168,14 +168,14 @@ It is clear to verify the correctness of our algorithm by Theorem \ref{thm:finit
 \Require{vectors $V$ ($|V|=n$); key features $\mathbf{f}_i$ for each vector $i\in V$; candidate pairs $P$ ($|P| = p$); all vectors' features $U$; weights of the features $W = \{w_1,\cdots,w_{|U|}\}$; $\epsilon \in (0,1)$; $\delta \in (0,1)$.}
 \Ensure{$Sim(u,v)$ for each $(u, v) \in P$.}
 \State $m \gets |U|$; $k \gets 0$; $S \gets \emptyset$;
-\State $S(u,v) \gets \sum_{i\in \mathbf{f}_u \cap \mathbf{f}_v} u[i] \cdot v[i]$ for each $(u, v) \in P$;
+\State $S(u,v) \gets \sum_{i\in \mathbf{f}_u \cup \mathbf{f}_v} u[i] \cdot v[i]$, and $k_{u,v} = |\mathbf{f}_u \cup \mathbf{f}_v|$ for each $(u, v) \in P$;
 \While {$k < m$}
 	\State $k' \gets \textsf{next-sample-size}(k)$;
 	\For {$i$ from $k$ to $k'-1$}
 		\State Uniformly sample a feature $s$ from $U\setminus S$;
 		\For {each $(u, v) \in P$}
-			\If {$s \not\in \mathbf{f}_u \cap \mathbf{f}_v$}
-				\State $S(u,v) \gets S(u,v)+u[s]\cdot v[s]$;
+			\If {$s \not\in \mathbf{f}_u \cup \mathbf{f}_v$}
+				\State $S(u,v) \gets S(u,v)+u[s]\cdot v[s]$, $k_{u,v} \gets k_{u,v}+1$;
 			\EndIf
 		\EndFor
 		\State $S \gets S\cup \{s\}$;
@@ -185,14 +185,14 @@ It is clear to verify the correctness of our algorithm by Theorem \ref{thm:finit
 		\State break the {\bf while} loop;
 	\EndIf
 \EndWhile
-\State $\mathsf{S} \gets \{S(u,v)/k : u,v\in V, (u,v)\in P\}$.
+\State $\mathsf{S} \gets \{S(u,v)/k_{u,v} : u,v\in V, (u,v)\in P\}$.
 \State {\bf return} $\mathsf{S}$.
 \end{algorithmic}
 \end{algorithm}
 
 \subsection{Improving the Upper Bound}
 \label{sec:imprb}
-Note that in the upper bound $\Delta$ of Algorithm \ref{alg:csa}, $m$ is a dominating variable: it is proportional to $\Delta$. Usually $m$ can be quite large, e.g., from 100 to 10K. Thus it is worth investigating how to mitigate the negative effect of large $m$. The idea comes from Theorem \ref{thm:main}, which assumes the range of each function $f$ is $[0,m]$. However in reality, most feature products $u[s]\cdot v[s]$ are close to zero due to sparsity, and its maximum value shall be much less than $m$. In practice, usually we can assume there is a good estimation (much less than $m$) on the maximum feature product based on historic experience. To further lower the upper bound $\Delta$, a variant of Algorithm \ref{alg:csa} may use the bound as follows:
+Note that in the upper bound $\Delta$ of Algorithm \ref{alg:csa}, $m$ is a dominating variable: it is proportional to $\Delta$. Usually $m$ can be quite large, e.g., from 100 to 10K. Thus it is worth investigating how to mitigate the negative effect of large $m$. The idea comes from Theorem \ref{thm:main}, which assumes the range of each function $f$ is $[0,m]$. However in reality, most feature products $u[s]\cdot v[s]$ are close to zero due to sparsity, and its maximum value shall be much less than $m$. In practice, usually we can assume there is a good estimation (much less than $m$) on the maximum feature product based on historic experience. For example, if in a vector we choose the features whose values are no less than 0.1 as the key features, then for the rest features each product must be less than 0.01, implying we can actually reduce $m$ to as low as 0.01. To further lower the upper bound $\Delta$, a variant of Algorithm \ref{alg:csa} may use the bound as follows:
 $$\hat{m} = \max_{i\in [1,\cdots,m], (u,v) \in P}u[i]\cdot v[i],$$
 where $[1,\cdots,m]$ denotes all the $m$ features, and $V$ is the set of all vectors. Intuitively, $\hat{m}$ is the maximum value of all the feature products, and we assume we have a good estimation of $\hat{m}$, which can be chosen by sampling from historical data. 
 Then we may choose the upper bound as follows:
