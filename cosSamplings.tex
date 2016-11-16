@@ -57,6 +57,7 @@ $$\widetilde{Sim}(u,v) = \frac{1}{|S|} \sum_{s_i\in S} u_{s_i}\cdot v_{s_i},$$
 where $S$ is the set of sampled features. 
 That is, we can choose $k$ out of $m$ features at random, and compute the average of the $k$ sampled feature products as an approximation of the cosine similarity.
 Thanks to the recent advance in statistical learning theory (especially the results of Rademacher average), there are tight error bounds for this sampling method.
+For better performance we also consider the existence of key features (with relatively high feature values) of each vector, like many existing sampling algorithms \cite{CL99,BKP15}. We first separate these key features from the minor ones and calculate their products. Then we apply the above sampling on the minor features. Usually due to data sparsity, the number of key features is much smaller than the entire number of features. Thus treating key features individually will not incur much cost. We also use LSH to detect vectors that are definitely dissimilar before sampling on the features.
 
 The approximation error of each our algorithm can be upper bounded by using Rademacher average \cite{BM02,Mohri09,BBM05}. We can treat the similarity approximation as a learning problem over large scale data set. In the analysis, we want to upper bound the approximation error for the worst case, i.e., to bound the maximum error $\overline{E}$ among the pairs of our observation:
 $$\overline{E} = \max_{(u,v)\in P} |\widetilde{Sim}(u,v) - Sim(u,v)|.$$
