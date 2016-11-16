@@ -20,6 +20,13 @@ Davide Anguita, Alessandro Ghio, Luca Oneto, and Sandro Ridella.
 \newblock {\em IEEE transactions on neural networks and learning systems},
   25(12):2202--2211, 2014.
 
+\bibitem{BKP15}
+Grey Ballard, Tamara~G Kolda, Ali Pinar, and C~Seshadhri.
+\newblock Diamond sampling for approximate maximum all-pairs dot-product (mad)
+  search.
+\newblock In {\em Data Mining (ICDM), 2015 IEEE International Conference on},
+  pages 11--20. IEEE, 2015.
+
 \bibitem{BBM05}
 Peter~L Bartlett, Olivier Bousquet, and Shahar Mendelson.
 \newblock Local rademacher complexities.
@@ -88,6 +95,11 @@ Moses~S Charikar.
 \newblock Similarity estimation techniques from rounding algorithms.
 \newblock In {\em Proceedings of the thiry-fourth annual ACM symposium on
   Theory of computing}, pages 380--388. ACM, 2002.
+
+\bibitem{CL99}
+Edith Cohen and David~D Lewis.
+\newblock Approximating matrix multiplication for pattern recognition tasks.
+\newblock {\em Journal of Algorithms}, 30(2):211--252, 1999.
 
 \bibitem{DHM04}
 Xin Dong, Alon Halevy, Jayant Madhavan, Ema Nemes, and Jun Zhang.
