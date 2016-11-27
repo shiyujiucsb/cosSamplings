@@ -36,11 +36,11 @@ int main(int argc, char **argv) {
   char *vocab;
   int sample, nSamples;
   int *shuffle;
-  std::unordered_set<int> *keyFeatures;
-  double epsilon, delta, threshold = 0.1;
+  std::unordered_set<int> keyFeatures;
+  std::unordered_set<int> keyVectors;
+  double epsilon, delta, threshold = 0.09;
   int sampleInc;
-  int *S;
-  double *sim, t;
+  double *sim;
   double max_error;
   int *top, *apprxTop;
   std::unordered_set<int>::iterator itr;
@@ -63,7 +63,6 @@ int main(int argc, char **argv) {
   M = (float *)malloc((long long)words * (long long)size * sizeof(float));
   psum = (float *)malloc((long long)words * (long long)size * sizeof(float));
   shuffle = (int *)malloc(size * sizeof(int));
-  S = (int *)calloc(words, sizeof(int));
   sim = (double *)calloc(words, sizeof(double));
   for (a = 0; a < size; a++) shuffle[a] = a;
   for (a = 0; a < size; a++) {
@@ -90,8 +89,6 @@ int main(int argc, char **argv) {
   }
   fclose(f);
   while (1) {
-    keyFeatures = (std::unordered_set<int>*)malloc(words * sizeof(std::unordered_set<int>));
-    for (a = 0; a < words; a++) S[a] = 0;
     top = (int *)calloc(words, sizeof(int));
     apprxTop = (int *)calloc(words, sizeof(int));
     for (a = 0; a < N; a++) { bestd[a] = 0; bestd2[a] = 0; }
@@ -141,7 +138,7 @@ int main(int argc, char **argv) {
       for (a = 0; a < size; a++) {
         vec[a] += M[a + bi[b] * size];
         if (fabs(M[a + bi[b] * size]) > threshold) {
-          keyFeatures[bi[b]].insert(a);
+          keyFeatures.insert(a);
         }
       }
     }
@@ -157,9 +154,9 @@ int main(int argc, char **argv) {
       if (a == 1) continue;
       dist = 0;
       for (a = 0; a < size; a++) {
-          dist += fabs(vec[a] * M[a + c * size]);
-          if (fabs(M[a + c * size]) > threshold) {
-            keyFeatures[c].insert(a);
+          dist += vec[a] * M[a + c * size];
+          if (keyFeatures.find(a) != keyFeatures.end() && fabs(M[a + c * size]) > threshold) {
+            keyVectors.insert(c);
           }
       }
       sim[c] = dist;
@@ -183,42 +180,33 @@ int main(int argc, char **argv) {
 
     for (a = 0; a < N; a++) bestd2[a] = -1;
     for (a = 0; a < N; a++) bestw2[a][0] = 0;
-    nSamples = 0; epsilon = 0.05; delta = 0.0001;
+    nSamples = 0; epsilon = 0.14; delta = 0.001;
     for (a = 0; a < words; a++) psum[a] = 0.0;
     printf("\n                                              Word         Approximation\n------------------------------------------------------------------------\n");
     sampleInc = 10;
     srand(101);
     max_error = 0.0;
-    while (nSamples < size){
-      nSamples+=sampleInc;
-      for (c = 0; c < words; c++) {
-        for (d = nSamples-sampleInc; d<nSamples; d++) {
-          sample = shuffle[d];
-          a = 0;
-          for (b = 0; a == 0 && b < cn; b++) if (bi[b] == c) a = 1;
-          if (a == 1) break;
-          if (keyFeatures[bi[b]].find(sample)==keyFeatures[bi[b]].end() && keyFeatures[c].find(sample)==keyFeatures[c].end()){
-            psum[c] += fabs(vec[sample] * M[sample + c * size]);
-            S[c]++;
-          }
-        }
-      }
-      D = threshold * threshold * size * pow((log(size) - log(delta))/(2.0*nSamples), 0.5);
-      if (D < epsilon) break;
-    }
+    int p = words - keyVectors.size();
     for (c = 0; c < words; c++) {
-      a = 0; t = 0.0;
-      for (itr = keyFeatures[bi[b]].begin(); itr != keyFeatures[bi[b]].end(); ++itr){
-        t += fabs(vec[*itr] * M[*itr + c * size]);
-        a++;
-      }
-      for (itr = keyFeatures[c].begin(); itr != keyFeatures[c].end(); ++itr){
-        if (keyFeatures[bi[b]].find(*itr) == keyFeatures[bi[b]].end()) {
-          t += fabs(vec[*itr] * M[*itr + c * size]);
-          a++;
+      a = 0;
+      for (b = 0; a == 0 && b < cn; b++) if (bi[b] == c) a = 1;
+      if (a == 1) continue;
+      if (keyVectors.find(c) == keyVectors.end()) {
+        nSamples = 0;
+        while (nSamples < size){
+          nSamples+=sampleInc;
+          for (d = nSamples-sampleInc; d<nSamples; d++) {
+            sample = shuffle[d];
+            psum[c] += vec[sample] * M[sample + c * size];
+          }
+          D = pow((-2.0 * log(delta/2))/nSamples, 0.5);
+          if (D < epsilon) break;
         }
+        psum[c] = psum[c]/nSamples*size;
+      }else{
+        for (a = 0; a < size; a++) psum[c] += vec[a] * M[a + c * size];
       }
-      psum[c] = psum[c]/S[c]*(size-a) + t;
+          
       if (fabs(psum[c]-sim[c]) > max_error) max_error = fabs(psum[c]-sim[c]);
       for (a = 0; a < N; a++) {
         if (psum[c] > bestd2[a]) {
@@ -234,6 +222,7 @@ int main(int argc, char **argv) {
         }
       }
     }
+    
     b = 0;
     for (a = 0; a < N; a++) {
       printf("%50s\t\t%f\n", bestw2[a], bestd2[a]);
@@ -243,9 +232,9 @@ int main(int argc, char **argv) {
       }
       if (c!=0) b++;
     }
+    printf("%d\n", p);
     printf("%lld\t%d\n", size, nSamples);
     printf("%f\t%f\n", max_error, b*1.0/N);
-    free(keyFeatures); 
     free(top); free(apprxTop); 
   }
   return 0;
