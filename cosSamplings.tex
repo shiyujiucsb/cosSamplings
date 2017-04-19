@@ -1,7 +1,7 @@
-\documentclass{article}
+\documentclass[sigconf,anonymous]{acmart}
 
 \usepackage{graphicx,tikz}
-\usepackage{fullpage}
+%\usepackage{fullpage}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -9,7 +9,7 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{booktabs}
-\usepackage{color}
+%\usepackage{color}
 
 %\renewcommand{\baselinestretch}{0.95}
 %\setlength{\textfloatsep}{0.1cm}
@@ -17,19 +17,18 @@
 
 \begin{document}
 
-\title{\Large\bf Approximating All-Pairs Similarity Search by Rademacher Average}
-\author{Shiyu Ji\\ shiyu@cs.ucsb.edu}
+\title{Approximating All-Pairs Similarity Search by Rademacher Average}
+\author{Anonymous Author(s)}
 \date{}
-\maketitle
 
-\newtheorem{definition}{Definition}
-\theoremstyle{definition}
-\newtheorem{theorem}{Theorem}
-\theoremstyle{plain}
-\newtheorem{lemma}{Lemma}
-\theoremstyle{plain}
-\newtheorem{corollary}{Corollary}
-\theoremstyle{plain}
+%\newtheorem{definition}{Definition}
+%\theoremstyle{definition}
+%\newtheorem{theorem}{Theorem}
+%\theoremstyle{plain}
+%\newtheorem{lemma}{Lemma}
+%\theoremstyle{plain}
+%\newtheorem{corollary}{Corollary}
+%\theoremstyle{plain}
 
 \begin{abstract}
 All-pairs similarity search (APSS) has abundant applications in many fields such as collaborative filtering, recommendations, search query suggestions, spam detection, etc.
@@ -39,6 +38,7 @@ To the best of our knowledge, we are the first to apply Rademacher average to bo
 {\color{black} Our approximation algorithms can be used to efficiently evaluate false positive and false negative of the candidate pairs given by some popular Locality Sensitive Hashing based methods, which can locate the potentially similar pairs and significantly avoid unnecessary comparisons.}
 We also evaluate our algorithms by experiments on real-world data sets to verify that our upper bounds are tight enough for practical use.
 \end{abstract}
+\maketitle
 
 \section{Introduction}
 All-pairs similarity search (APSS) has received extensive research interest recently \cite{BMS07,Xia16,ATY13,TAJY14}. Collaborative filtering \cite{SKK01}, similarity-based recommendations \cite{RV97}, search query suggestions \cite{CJP08}, spam and plagiarism detection \cite{CDG07,LCH06} all find APSS useful in practice. However, it is time consuming to do an APSS since the time complexity grows quadratically with the problem scale \cite{BMS07,ATY13,TAJY14}. To improve performance, many approximation approaches have been proposed \cite{GIM99,FKS03,IM98,Char02,LRU14}. Hence the computation \cite{BMS07,DHM04,Xia16,ATY13,TAJY14} and approximation \cite{LRU14,GIM99,FKS03,IM98,Char02} of the all-pairs similarities have been popular in research for more than ten years.
@@ -63,7 +63,9 @@ The approximation error of each our algorithm can be upper bounded by using Rade
 $$\overline{E} = \max_{(u,v)\in P} |\widetilde{Sim}(u,v) - Sim(u,v)|.$$
 {\color{black}We can use LSH-based scheme to choose the set of pairs $P$ to be observed. }
 Rademacher average does an excellent job on how to bound such maximum error \cite{RU15,RU16}. The key result we use in this paper is that with probability at least $1-\delta$,
-$$\overline{E} \leq \min\left\{c\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, R + c\left(1+\sqrt{\frac{8}{k}\log \frac{2}{\delta}} + \sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{8R}{c}}\right)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\right\},$$
+$$\begin{aligned}
+\overline{E} \leq &\min\bigg\{c\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, R + c\bigg(1+\sqrt{\frac{8}{k}\log \frac{2}{\delta}} \\&+ \sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{8R}{c}}\bigg)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\bigg\},
+\end{aligned}$$
 where $p=|P|$ (the observation size), $R$ denotes the Rademacher average of the data set, $n$ is the number of vectors, $k$ is the number of samples, and $c$ is the number of features for cosine similarity. Often by using LSH our observation can be confined within a relatively small set of pairs, i.e., $p << n^2$. 
 It is also possible to upper bound the Rademacher average by the state-of-art results \cite{AGO14,RU15,RU16}. Thus we can find an upper bound of the worst errors for our approximation algorithms.
 
@@ -115,7 +117,7 @@ $$\sup_{f\in F} | A_S(f) - A_D(f) | \leq m\sqrt{\frac{\log(2|F|) + \log(1/\delta
 \end{theorem}
 We leave the proof of Theorem \ref{thm:finite} to the Appendix.
 
-However if $F$ is not necessarily infinite, the above bound cannot apply. We can use Rademacher average to deal with the general case. 
+However if $F$ is not necessarily finite, the above bound cannot apply. We can use Rademacher average to deal with the general case. 
 Define the \emph{Rademacher average} \cite{Mohri09,BM02,Oneto13} of $F$ given $S$ as
 \newcommand{\E}{\mathbb{E}}
 $$R_S(F) = \E_\sigma \left[\sup_{f\in F} \frac{2}{k}\sum_{i=1}^k \sigma_i f(s_i) \right],$$
@@ -128,7 +130,9 @@ We leave the proofs to the Appendix.
 \label{thm:main}
 Let $F$ be a collection of functions $f$ mapping $D$ to $[0,m]$. 
 With probability at least $1-\delta$, we have
-$$\sup_{f\in F}|A_S(f) - A_D(f)| \leq R_S(F) + \left(m+m\sqrt{\frac{8}{k}\log \frac{2}{\delta}} + m\sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{8R_S(F)}{m}}\right)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}.$$
+$$\begin{aligned}
+\sup_{f\in F}|A_S(f) - A_D(f)| \leq &R_S(F) + \bigg(m+m\sqrt{\frac{8}{k}\log \frac{2}{\delta}} \\&+ m\sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{8R_S(F)}{m}}\bigg)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}.
+\end{aligned}$$
 \end{theorem}
 
 The remaining item we need to upper bound is $R_S(F)$. Our result is similar to Massart's lemma \cite{AGO14}.
@@ -153,7 +157,9 @@ where $\ell = \sqrt{\max_{f\in F} \sum_{i=1}^k f(s_i)^2}$. Since $F$ is finite, 
 
 \subsection{The Algorithm}
 The approximation algorithm works in an iterative mode. For each iteration, we sample some new features $s_i$'s among $D$ and aggregate the feature products given by $f_{u,v}(s_i)$ for each $f_{u,v}$ in $F$. Then we compute the error upper bound:
-$$\Delta = \min\left\{m\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, \frac{\ell\sqrt{8\log p}}{k} +\left(m+m\sqrt{\frac{8}{k}\log \frac{2}{\delta}} + m\sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{16\ell\sqrt{2\log p}}{mk}}\right)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\right\},$$
+$$\begin{aligned}
+\Delta = &\min\bigg\{m\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, \frac{\ell\sqrt{8\log p}}{k} +\bigg(m+m\sqrt{\frac{8}{k}\log \frac{2}{\delta}} \\&+ m\sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{16\ell\sqrt{2\log p}}{mk}}\bigg)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\bigg\},
+\end{aligned}$$
 where $\ell = \sqrt{\max_{f\in F} \sum_{i=1}^k f(s_i)^2}$, and $k$ is the number of aggregated samples. 
 If $\Delta \leq \epsilon$, then we stop and return the averages $\frac{1}{k}\sum_{s_i\in S}f_{u,v}(s_i)$ for each pair $u, v$. Otherwise, we continue to the next round, where we will sample more features. If $\Delta \leq \epsilon$ can never be satisfied, at the end we will sample all the $m$ features and return the averages as the exact solution. Algorithm \ref{alg:csa} gives the pseudocode of our solution. We use progressive approximation, i.e., for each round, the next sample size $k'$ is larger than the previous size $k$. The algorithm stops once the upper bound $\epsilon$ can be achieved. Since we assume the number of features $m$ is large, e.g., in word2vec $m$ is around 500 to 1000, and the number of key features of each vector is small due to the sparsity, e.g., usually less than 10, in this algorithm we take $m$ as the size of sample space.
 
@@ -180,7 +186,7 @@ It is clear to verify the correctness of our algorithm by Theorem \ref{thm:finit
 		\EndFor
 		\State $S \gets S\cup \{s\}$;
 	\EndFor
-	\State $\Delta \gets \min\left\{m\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, \frac{\ell\sqrt{8\log p}}{k} +\left(m+m\sqrt{\frac{8}{k}\log \frac{2}{\delta}} + m\sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{16\ell\sqrt{2\log p}}{mk}}\right)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\right\}$;
+	\State $\begin{aligned}\Delta \gets &\min\bigg\{m\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, \frac{\ell\sqrt{8\log p}}{k} +\bigg(m+m\sqrt{\frac{8}{k}\log \frac{2}{\delta}} \\&+ m\sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{16\ell\sqrt{2\log p}}{mk}}\bigg)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\bigg\}\end{aligned}$;
 	\If {$\Delta \leq \epsilon$}
 		\State break the {\bf while} loop;
 	\EndIf
@@ -196,10 +202,12 @@ Note that in the upper bound $\Delta$ of Algorithm \ref{alg:csa}, $m$ is a domin
 $$\hat{m} = \max_{i\in [1,\cdots,m], (u,v) \in P}u[i]\cdot v[i],$$
 where $[1,\cdots,m]$ denotes all the $m$ features, and $V$ is the set of all vectors. Intuitively, $\hat{m}$ is the maximum value of all the feature products, and we assume we have a good estimation of $\hat{m}$, which can be chosen by sampling from historical data. 
 Then we may choose the upper bound as follows:
-$$\Delta = \min\left\{\hat{m}\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, \frac{\ell\sqrt{8\log p}}{k} +\hat{m}\left(1+\sqrt{\frac{8}{k}\log \frac{2}{\delta}} + \sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{16\ell\sqrt{2\log p}}{\hat{m}k}}\right)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\right\}.$$
+$$\begin{aligned}
+\Delta = &\min\bigg\{\hat{m}\sqrt{\frac{\log p + \log(1/\delta)}{2k}}, \frac{\ell\sqrt{8\log p}}{k} +\hat{m}\bigg(1+\sqrt{\frac{8}{k}\log \frac{2}{\delta}}\\ &+ \sqrt{\frac{8}{k}\log \frac{2}{\delta} + \frac{16\ell\sqrt{2\log p}}{\hat{m}k}}\bigg)\sqrt{\frac{\log \frac{8}{\delta}}{2k}}\bigg\}.
+\end{aligned}$$
 We use experiments (in Section \ref{sec:eval}) to show that an upper bound estimation like $\hat{m} = 0.1$ can achieve acceptable performance.
 
-\section{Similarity Detection Given Threshold and Top-$K$ Approximation}
+\section{Similarity Detection Given Threshold and Top-K Approximation}
 \label{sec:cmp}
 In this section we discuss the possible methods to 1) detect potentially similar pairs given a threshold $\tau$, and 2) approximate the top $k$ most similar vector pairs. We compare four methods given as follows:
 \begin{itemize}
@@ -217,7 +225,7 @@ For each method, we consider complexity and accuracy.
 
 \subsection{Similarity Detection Given Threshold}
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \centering
 \begin{tabular}{ c | c  c  c  c }
 \specialrule{1pt}{1pt}{1pt}
@@ -232,7 +240,7 @@ Recall & $\geq P_\theta^{r,b}(1-P_\epsilon^\tau)(1-\delta)$ & $\geq P_\theta^{r,
 \end{tabular}
 \caption{Complexity and accuracy analysis of our methods to detect similar pairs given threshold $\tau = \cos \theta$.}
 \label{tab:sdgt}
-\end{table}
+\end{table*}
 
 Table \ref{tab:sdgt} gives the complexity and accuracy of the three above methods. We first explain the used notations as follows:
 \begin{itemize}
@@ -251,9 +259,9 @@ We explain some bounds in Table \ref{tab:sdgt}.
 \end{itemize}
 Other bounds are clear to verify. With small enough errors $\epsilon$ and $\delta$, LSH + Sampling is competitive with high accuracy and less time complexity.
 
-\subsection{Top-$k$ Similarity Approximation}
+\subsection{Top-K Similarity Approximation}
 
-\begin{table}[!t]
+\begin{table*}[!t]
 \centering
 \begin{tabular}{ c | c  c  c }
 \specialrule{1pt}{1pt}{1pt}
@@ -267,7 +275,7 @@ Recall & $\geq P_{(K)}^{r,b}(1-P_\epsilon^{(K)})(1-\delta) $ & $\geq P_{(K)}^{r,
 \end{tabular}
 \caption{Complexity and accuracy analysis of our methods to approximate top $K$.}
 \label{tab:tk}
-\end{table}
+\end{table*}
 
 Table \ref{tab:tk} gives the complexity and accuracy of our methods to approximate top $K$. The notations and results are similar to Table \ref{tab:sdgt}, except
 \begin{itemize}
